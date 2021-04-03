@@ -1,5 +1,6 @@
 import * as RE from 'rogue-engine';
-import { DirectionalLight, Object3D, PerspectiveCamera, Vector3, MathUtils, Quaternion, Fog } from 'three';
+import { Object3D, PerspectiveCamera, Vector3 } from 'three';
+import Ammo from '../Classes/ammo.wasm';
 import { AmmoPhysics } from '../Classes/AmmoPhysics';
 import FPSShooter from './FPSShooter';
 
@@ -8,15 +9,13 @@ const bwdDirection = new Vector3(0, 0, 1);
 const leftDirection = new Vector3(-1, 0, 0);
 const rightDirection = new Vector3(1, 0, 0);
 
-const up = new Vector3(0, 1, 0);
-
 export default class FPSController extends RE.Component {
   @RE.Prop("Number") rotSpeed: number = 1;
   @RE.Prop("Number") minCameraRotY: number = 2.2;
   @RE.Prop("Number") maxCameraRotY: number = 4.5;
-  @RE.Prop("Number") fwdSpeed: number = 3;
-  @RE.Prop("Number") bwdSpeed: number = 2;
-  @RE.Prop("Number") latSpeed: number = 3;
+  @RE.Prop("Number") walkSpeed: number = 3;
+  @RE.Prop("Number") fwdSpeedMultiplier: number = 1.3;
+  @RE.Prop("Number") runSpeedMultiplier: number = 1.8;
   @RE.Prop("Number") jumpHeight: number = 0.5;
   @RE.Prop("Number") jumpSpeed: number = 50;
   @RE.Prop("Object3D") mainWeapon: Object3D;
@@ -25,7 +24,11 @@ export default class FPSController extends RE.Component {
   camera: PerspectiveCamera;
   cameraPos: Object3D;
 
-  character;
+  character: {
+    shape: Ammo.btCapsuleShape;
+    ghostObject: Ammo.btPairCachingGhostObject;
+    controller: Ammo.btKinematicCharacterController;
+  } | undefined;
   characterDirection;
 
   awake() {
@@ -62,16 +65,18 @@ export default class FPSController extends RE.Component {
     this.object3d.rotation.order = 'YXZ';
   }
 
-  start() {
-    RE.App.currentScene.fog = new Fog("#fff");
-  }
-
   update() {
     if (!AmmoPhysics.isRunning) return;
 
     if (AmmoPhysics.isRunning && !this.character) {
       this.character = AmmoPhysics.addCharacter();
+      if (this.character !== undefined) {
+        this.character.controller.setJumpSpeed(this.jumpSpeed);
+        this.character.controller.setMaxJumpHeight(this.jumpHeight);
+      }
     }
+
+    if (!this.character) return;
 
     if (this.mainWeapon && !this.mainWeaponShooter) {
       const mainWeaponShooter = RE.getComponent(FPSShooter, this.mainWeapon);
@@ -117,7 +122,7 @@ export default class FPSController extends RE.Component {
 
     RE.Input.keyboard.getKeyPressed("Escape") && RE.Input.mouse.unlock();
 
-    let actualSpeed = this.fwdSpeed;
+    let actualSpeed = this.walkSpeed;
     let onlyFwd = true;
 
     const movementVector = new Vector3();
@@ -147,9 +152,9 @@ export default class FPSController extends RE.Component {
 
     if (onlyFwd) {
       if (RE.Input.keyboard.getKeyPressed("ShiftLeft") && !this.mainWeaponShooter.isReloading)
-        actualSpeed *= 1.8;
+        actualSpeed *= this.runSpeedMultiplier;
       else if (!this.mainWeaponShooter.isReloading)
-        actualSpeed *= 1.3;
+        actualSpeed *= this.fwdSpeedMultiplier;
     }
 
     movementVector.normalize();

@@ -7,8 +7,6 @@ import {
   Color,
   ShaderMaterial,
   Audio,
-  Material,
-  SphereBufferGeometry,
   PointsMaterial,
 } from 'three';
 

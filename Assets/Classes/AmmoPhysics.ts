@@ -231,12 +231,11 @@ export class AmmoPhysics {
   	ghostObject.activate(true);
 
 		const controller = new this.ammo.btKinematicCharacterController(ghostObject, shape, 0.1, 1);
-		controller.setJumpSpeed(3.5);
 		controller.setUseGhostSweepTest(true);
-	
+
 		controller.setGravity(-this.world.getGravity().y());
 		controller.setMaxSlope(Math.PI / 3);
-	
+
 		this.world.addCollisionObject(ghostObject, 32, -1 );
 		this.world.addAction(controller);
 
