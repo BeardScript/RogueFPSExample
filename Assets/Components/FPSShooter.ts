@@ -117,8 +117,6 @@ export default class FPSShooter extends RE.Component {
 
     this.timer = 0;
     this.magazine--;
-
-    console.log(worldPos);
   }
 }
 

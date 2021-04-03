@@ -73,8 +73,6 @@ export default class FPSController extends RE.Component {
       this.character = AmmoPhysics.addCharacter();
     }
 
-    // console.log(this.character.ghostObject.getOverlappingObject().isKinematicObject());
-
     if (this.mainWeapon && !this.mainWeaponShooter) {
       const mainWeaponShooter = RE.getComponent(FPSShooter, this.mainWeapon);
       if (!mainWeaponShooter) {
