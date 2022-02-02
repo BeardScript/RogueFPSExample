@@ -63,7 +63,7 @@ export class AmmoPhysics {
 	static getShape(mesh: THREE.Mesh) {
 		if (!this.ammo) return;
 
-		const geometry: THREE.Geometry | THREE.BufferGeometry = mesh.geometry;
+		const geometry: THREE.BufferGeometry = mesh.geometry;
 		let scale: THREE.Vector3 = new THREE.Vector3();
 		mesh.getWorldScale(scale);
 
@@ -95,7 +95,7 @@ export class AmmoPhysics {
 			return shape;
 		}
 
-		if (geometry instanceof THREE.Geometry) return;
+		if (!(geometry instanceof THREE.BufferGeometry)) return;
 
 		let vertices = geometry.attributes.position.array;
 		let indices = geometry.index?.array as ArrayLike<number>;

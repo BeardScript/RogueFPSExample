@@ -7,6 +7,7 @@ export declare class App {
     private static _activeCamera;
     private static _scenes;
     private static _sceneController;
+    private static _lanIP;
     private constructor();
     static get activeCamera(): string;
     static set activeCamera(cameraId: string);
@@ -21,6 +22,7 @@ export declare class App {
     }[];
     static get sceneController(): SceneController;
     static set sceneController(value: SceneController);
+    static get lanIP(): string;
     static toJSON(assetPaths: {
         [uuid: string]: string;
     }): {
@@ -29,6 +31,7 @@ export declare class App {
             name: string;
             uuid: string;
         }[];
+        lanIP: string;
         assetPaths: {
             [uuid: string]: string;
         };
@@ -42,6 +45,7 @@ export declare class App {
         assetPaths: {
             [uuid: string]: string;
         };
+        lanIP?: string;
     }): void;
     static play(config: {
         title: string;
@@ -54,7 +58,8 @@ export declare class App {
         };
     }): void;
     static loadScene(name: string | number): Promise<void>;
-    static clone(object: Object3D, parent?: Object3D): Object3D;
+    private static loadSceneFunc;
+    static clone(object: Object3D, parent?: Object3D): Object3D<import("three").Event>;
     private static loadComponentsRecursive;
     private static loadAudioListeners;
 }

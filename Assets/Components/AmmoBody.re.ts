@@ -1,5 +1,5 @@
 import * as RE from 'rogue-engine';
-import { Mesh, Vector3 } from 'three';
+import { Mesh } from 'three';
 import Ammo from '../Classes/ammo.wasm';
 import { AmmoPhysics } from '../Classes/AmmoPhysics';
 

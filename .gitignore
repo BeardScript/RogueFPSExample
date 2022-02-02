@@ -5,3 +5,4 @@ dist/*
 !dist/ammo.wasm.wasm
 BUILD/
 rogue_builds/
+package-lock.json

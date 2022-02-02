@@ -1,6 +1,6 @@
 import * as RE from 'rogue-engine';
-import { DirectionalLight, Euler, MathUtils, Matrix4, Object3D, Texture, Vector3 } from 'three';
-import ParticleSystem from './ParticleSystem';
+import { MathUtils, Object3D, Vector3 } from 'three';
+import ParticleSystem from './ParticleSystem.re';
 
 const v3Zero = new Vector3();
 

@@ -35,6 +35,14 @@
     init();
 
     async function init() {
+      const refreshCount = await (await fetch("/getRefreshCount")).json();
+
+      window.onfocus = async () => {
+        const curRefreshCount = await (await fetch("/getRefreshCount")).json();
+
+        if (curRefreshCount !== refreshCount) window.location.reload();
+      };
+
       window['ROGUE_ISDEV'] = true;
 
       const RE = window["rogue-engine"];
@@ -45,14 +53,14 @@
       RE.Input.touch.init();
 
       const res = await fetch("/getScenePlayerConfig");
-      const {title, scenes, sceneJson, assetPaths} = await res.json();
+      const {appConfig, sceneJson, assetPaths} = await res.json();
 
-      console.log({title, scenes, sceneJson, assetPaths});
+      console.log({appConfig, sceneJson, assetPaths});
 
       RE.AssetManager.setAssetPaths(assetPaths || {});
       RE.AssetManager.loadAssetConfigs(sceneJson.assetConfigs);
 
-      RE.App.fromJSON({title, scenes});
+      RE.App.fromJSON(appConfig);
       RE.App.activeCamera = sceneJson.initialCameraId;
       RE.App.sceneController = RE.Runtime;
       RE.App.currentScene = new THREE.ObjectLoader().parse(sceneJson.scene);

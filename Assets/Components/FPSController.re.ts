@@ -2,7 +2,7 @@ import * as RE from 'rogue-engine';
 import { Object3D, PerspectiveCamera, Vector3 } from 'three';
 import Ammo from '../Classes/ammo.wasm';
 import { AmmoPhysics } from '../Classes/AmmoPhysics';
-import FPSShooter from './FPSShooter';
+import FPSShooter from './FPSShooter.re';
 
 const fwdDirection = new Vector3(0, 0, -1);
 const bwdDirection = new Vector3(0, 0, 1);
@@ -173,11 +173,11 @@ export default class FPSController extends RE.Component {
     const halfHeight = this.character.shape.getHalfHeight();
     this.object3d.position.set(pos.x(), pos.y() - halfHeight, pos.z());
 
-    this.camera.position.copy(new Vector3(
+    this.camera.position.set(
       this.object3d.position.x,
       this.object3d.position.y + 1,
       this.object3d.position.z
-    ));
+    );
   }
 }
 
