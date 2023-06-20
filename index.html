@@ -40,7 +40,7 @@
       window.onfocus = async () => {
         const curRefreshCount = await (await fetch("/getRefreshCount")).json();
 
-        if (curRefreshCount !== refreshCount) window.location.reload();
+        if (curRefreshCount !== refreshCount && RE?.Runtime?.isRunning) window.location.reload();
       };
 
       window['ROGUE_ISDEV'] = true;

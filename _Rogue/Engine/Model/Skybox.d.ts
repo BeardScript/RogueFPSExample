@@ -58,17 +58,17 @@ declare class SkyboxClass {
     set azimuth(value: number);
     get showSun(): boolean;
     set showSun(value: boolean);
-    init(json?: SkyboxSerialization): void;
+    init(json?: SkyboxSerialization | SkyboxClass): void;
     private initProceduralSkybox;
     private initCubemapSkybox;
     toJSON(): SkyboxSerialization;
-    fromJSON(json: SkyboxSerialization): void;
+    fromJSON(json: SkyboxSerialization | SkyboxClass): void;
     private initWithDefaultValues;
     private getDefaultJSON;
     private setSunPosition;
 }
 export declare let Skybox: SkyboxClass;
-export declare type SkyboxSerialization = {
+export type SkyboxSerialization = {
     _enabled: boolean;
     _mode: 'procedural' | 'cubemap' | '360';
     layers: number;

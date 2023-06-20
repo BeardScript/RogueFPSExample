@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "outDir": "build/",
     "module": "esnext",
-    "target": "es5",
+    "target": "ES2015",
     "lib": ["es6", "dom", "es2015"],
     "allowJs": true,
     "moduleResolution": "node",
@@ -15,10 +15,10 @@
     "noImplicitAny": false,
     "importHelpers": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
     "paths": {
       "rogue-engine": [ "_Rogue/rogue-engine" ],
+      "@RE/*": [ "Assets/rogue_packages/*" ],
     }
   },
   "include": [

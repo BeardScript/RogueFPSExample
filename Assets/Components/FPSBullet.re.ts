@@ -1,6 +1,6 @@
 import * as RE from 'rogue-engine';
 import { Material, Mesh, Raycaster, Vector3 } from 'three';
-import { DecalGeometry } from '../Classes/DecalGeometry';
+import {DecalGeometry} from 'three/examples/jsm/geometries/DecalGeometry'
 
 const decalHelper = new Mesh();
 
@@ -61,7 +61,7 @@ export default class FPSBullet extends RE.Component {
       const scale = 0.1;
       const size = new Vector3( scale, scale, scale );
 
-      const decalGeometry = new DecalGeometry( obj, intersection.point, orientation, size ) as any
+      const decalGeometry = new DecalGeometry( obj as Mesh, intersection.point, orientation, size ) as any
       const decalMesh = new Mesh( decalGeometry, this.decal );
 
       const parent = RE.App.currentScene.getObjectByName("Projectiles");

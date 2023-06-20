@@ -1,4 +1,4 @@
-import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
+import type { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 export declare class Mouse {
     private _x;
     private _y;

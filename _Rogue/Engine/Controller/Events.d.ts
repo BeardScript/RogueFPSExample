@@ -1,6 +1,6 @@
-import { Object3D } from 'three';
-import Component from '../Model/Component';
-import SceneController from '../Model/SceneController';
+import type { Object3D } from 'three';
+import type Component from '../Model/Component';
+import type SceneController from '../Model/SceneController';
 export declare function onObjectAdded(callback: (object: Object3D, target: Object3D) => void): {
     stop: () => void;
 };

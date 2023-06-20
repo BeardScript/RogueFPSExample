@@ -1,4 +1,4 @@
-import Component from '../Model/Component';
+import type Component from '../Model/Component';
 import SceneController from '../Model/SceneController';
 import { WebGLRenderer, Scene } from 'three';
 export declare class RuntimeController extends SceneController {

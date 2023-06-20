@@ -54,9 +54,12 @@ export default class FPSShooter extends RE.Component {
 
   rotY = 0;
 
+  rotV3 = new Vector3();
+
   reload() {
+    this.rotV3.setFromEuler(this.object3d.rotation);
     this.object3d.rotation.setFromVector3(
-      this.object3d.rotation.toVector3().lerp(new Vector3(0, MathUtils.degToRad(70), 0), 10 * RE.Runtime.deltaTime)
+      this.rotV3.lerp(new Vector3(0, MathUtils.degToRad(70), 0), 10 * RE.Runtime.deltaTime)
     );
 
     this.curReloadTime += RE.Runtime.deltaTime * 1000;

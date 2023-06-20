@@ -1,5 +1,5 @@
 import { Scene, Object3D } from 'three';
-import SceneController from '../Model/SceneController';
+import type SceneController from '../Model/SceneController';
 export declare class App {
     private static _title;
     private static _settings;

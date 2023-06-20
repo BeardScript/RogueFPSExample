@@ -4,3 +4,8 @@ export declare function getStaticPath(path: string): string;
 export declare function loadComponentsRecursive(object: Object3D): void;
 export declare function loadAudioListeners(object: Object3D): void;
 export declare function dispose(object: Object3D): void;
+export declare function isEnabled(object: Object3D): boolean;
+export declare function isActive(object: Object3D): boolean;
+export declare function setEnabled(object: Object3D, enabled: boolean): void;
+export declare function enable(object: Object3D): void;
+export declare function disable(object: Object3D): void;

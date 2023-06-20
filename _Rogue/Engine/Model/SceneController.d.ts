@@ -1,13 +1,13 @@
 import { WebGLRenderer, Scene, Object3D, Camera, Clock } from 'three';
 import Lifecycle from './Lifecycle';
-import Component from '../Model/Component';
+import type Component from '../Model/Component';
 export default abstract class SceneController extends Lifecycle {
     renderFunc: () => void;
     private _clock;
     private _onPlayCallbacks;
     private _onStopCallbacks;
     private _throttledAdjustCameraAndRenderer;
-    protected _scene: Scene;
+    protected _scene: THREE.Scene;
     protected _containerId: string;
     protected _rogueDOMContainer: HTMLElement;
     protected _camera: Camera;
@@ -44,7 +44,7 @@ export default abstract class SceneController extends Lifecycle {
     private loadMaterials;
     play(scene: Scene, renderer?: WebGLRenderer, componentsToLoad?: any): void;
     stop(): void;
-    private updateEvensHandler;
+    private updateEventsHandler;
     pause(): void;
     resume(): void;
     togglePause(): void;
@@ -55,7 +55,10 @@ export default abstract class SceneController extends Lifecycle {
     protected beforeUpdate(): void;
     protected update(): void;
     protected afterUpdate(): void;
-    protected startRenderer(renderer?: WebGLRenderer): void;
+    startRenderer(renderer?: WebGLRenderer): void;
+    protected doOnResize: (entries: any) => void;
+    onResize: () => void;
+    resizeObserver: ResizeObserver;
     setSceneDimensions(width: number, height: number): void;
     private setCameraDimensions;
     protected adjustCameraAndRenderer(force?: boolean): void;

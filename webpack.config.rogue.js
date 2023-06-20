@@ -84,6 +84,7 @@ module.exports = {
     alias: {
       "Assets": resolve("Assets"),
       "rogue-engine": resolve("_Rogue/rogue-engine"),
+      "@RE": path.join(__dirname, './Assets/rogue_packages')
     },
     fallback: { "path": false, "fs": false }
   },
@@ -109,6 +110,9 @@ module.exports = {
     overlay: true,
     disableHostCheck: true,
     clientLogLevel: "warning"
+  },
+  watchOptions: {
+    aggregateTimeout: 200
   },
   performance: {
     hints: false

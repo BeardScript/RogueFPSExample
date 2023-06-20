@@ -1,4 +1,4 @@
-export declare type TouchInteraction = {
+export type TouchInteraction = {
     id: string;
     touch: Touch;
     x: number;

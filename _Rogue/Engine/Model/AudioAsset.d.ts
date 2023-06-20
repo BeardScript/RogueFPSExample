@@ -10,8 +10,8 @@ export declare class AudioAsset {
         buffer?: AudioBuffer;
     });
     get uuid(): string;
-    get path(): string;
-    get name(): string;
+    get path(): any;
+    get name(): any;
     getAudio(): Audio<GainNode>;
     getPositionalAudio(): PositionalAudio;
     static fromFile(filePath: string, onProgress?: () => void, onError?: () => void): Promise<AudioAsset>;
